@@ -8,6 +8,8 @@ var keys = require("./keys");
 var params = { screen_name: "voodoorundown", count: 20 };
 var spotify = new Spotify(keys.spotify);
 
+// *******  Twitter *******
+//
 function myTweets() {
   var client = new Twitter(keys.twitter);
   client.get("statuses/user_timeline", params, function(
@@ -25,8 +27,10 @@ function myTweets() {
   });
 }
 
+// *******  Spotify *******
+//
 function askSpotify() {
-  // console.log("Spotify");
+  // console.log("askSpotify");
   var client = new Spotify(keys.spotify);
 }
 
@@ -49,10 +53,41 @@ spotify.search({ type: "track", query: song, limit: 10 }, function(err, data) {
   console.log("Album: ", data.tracks.items[0].album.name);
 });
 
+// *******  OMDB *******
+//
+function askOMDB() {
+  console.log("askOMDB");
+
+  var movie = process.argv[3];
+
+  if (movie === undefined) {
+    movie = "Mr. Nobody";
+  }
+
+  var request = require("request");
+  var req = "http://www.omdbapi.com/?apikey=trilogy&t=" + movie;
+  console.log("Movie is:", movie, ":");
+  request(req, function(error, response, body) {
+    console.log(body);
+    console.log(req);
+    json = JSON.parse(body);
+    console.log("Title:", json.Title);
+    console.log("Year:", json.Year);
+    console.log("IMDB Rating:", json.imdbRating);
+    //    console.log ("Rotten Tomatoes",
+    console.log("Country:", json.Country);
+    console.log("Language:", json.Language);
+    console.log("Plot:", json.Plot);
+    console.log("Actors:", json.Actors);
+  });
+}
+
 var cmd = process.argv[2];
 
 if (cmd === "my-tweets") {
   myTweets();
 } else if (cmd === "spotify-this-song") {
   askSpotify();
+} else if (cmd === "movie-this") {
+  askOMDB();
 }
