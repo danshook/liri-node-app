@@ -2,7 +2,7 @@ require("dotenv").config();
 
 var Twitter = require("twitter");
 var Spotify = require("node-spotify-api");
-var Request = require("request");
+// var Request = require("request");
 var keys = require("./keys");
 
 var params = { screen_name: "voodoorundown", count: 20 };
@@ -30,10 +30,8 @@ function myTweets() {
 // *******  Spotify *******
 //
 function askSpotify() {
-  // console.log("askSpotify");
   var client = new Spotify(keys.spotify);
 }
-
 song = process.argv[3];
 if (song === undefined) {
   song = "The Sign";
@@ -56,20 +54,18 @@ spotify.search({ type: "track", query: song, limit: 10 }, function(err, data) {
 // *******  OMDB *******
 //
 function askOMDB() {
-  console.log("askOMDB");
-
   var movie = process.argv[3];
 
-  if (movie === undefined) {
+  if (movie == undefined) {
     movie = "Mr. Nobody";
   }
 
   var request = require("request");
   var req = "http://www.omdbapi.com/?apikey=trilogy&t=" + movie;
-  console.log("Movie is:", movie, ":");
+  // console.log("Movie is:", movie, ":");
   request(req, function(error, response, body) {
-    console.log(body);
-    console.log(req);
+    // console.log(body);
+    // console.log(req);
     json = JSON.parse(body);
     console.log("Title:", json.Title);
     console.log("Year:", json.Year);
