@@ -31,26 +31,27 @@ function myTweets() {
 //
 function askSpotify() {
   var client = new Spotify(keys.spotify);
-}
-song = process.argv[3];
-if (song === undefined) {
-  song = "The Sign";
-}
-
-spotify.search({ type: "track", query: song, limit: 10 }, function(err, data) {
-  if (err) {
-    return console.log("Error in Spotify: " + err);
+  // }
+  song = process.argv[3];
+  if (song === undefined) {
+    song = "The Sign";
   }
 
-  //   console.log ("Full:", JSON.stringify(data));
-  console.log("Artist:", data.tracks.items[0].artists[0].name);
-  console.log("Track name:", data.tracks.items[0].name);
-  console.log("Artist:", data.tracks.items[0].artists[0].name);
-  console.log("Track name:", data.tracks.items[0].name);
-  console.log("Preview: ", data.tracks.items[0].preview_url);
-  console.log("Album: ", data.tracks.items[0].album.name);
-});
+  spotify.search({ type: "track", query: song, limit: 10 }, function(
+    err,
+    data
+  ) {
+    if (err) {
+      return console.log("Error in Spotify: " + err);
+    }
 
+    //   console.log ("Full:", JSON.stringify(data));
+    console.log("Artist:", data.tracks.items[0].artists[0].name);
+    console.log("Track name:", data.tracks.items[0].name);
+    console.log("Preview: ", data.tracks.items[0].preview_url);
+    console.log("Album: ", data.tracks.items[0].album.name);
+  });
+}
 // *******  OMDB *******
 //
 function askOMDB() {
