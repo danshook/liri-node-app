@@ -25,4 +25,30 @@ function myTweets() {
   });
 }
 
-myTweets();
+function Spotify() {
+  // console.log("Spotify");
+  var client = new Spotify(keys.spotify);
+}
+
+song = process.argv[3];
+if (song === undefined) {
+  song = "The Sign";
+}
+
+spotify.search({ type: "track", query: song, limit: 10 }, function(err, data) {
+  if (err) {
+    return console.log("Error in Spotify: " + err);
+  }
+
+  //   console.log ("Full:", JSON.stringify(data));
+  console.log("Artist:", data.tracks.items[0].artists[0].name);
+  console.log("Track name:", data.tracks.items[0].name);
+});
+
+var cmd = process.argv[2];
+
+if (cmd === "my-tweets") {
+  myTweets();
+} else if (cmd === "spotify-this-song") {
+  Spotify();
+}
