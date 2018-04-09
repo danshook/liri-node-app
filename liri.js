@@ -25,7 +25,7 @@ function myTweets() {
   });
 }
 
-function Spotify() {
+function askSpotify() {
   // console.log("Spotify");
   var client = new Spotify(keys.spotify);
 }
@@ -43,6 +43,10 @@ spotify.search({ type: "track", query: song, limit: 10 }, function(err, data) {
   //   console.log ("Full:", JSON.stringify(data));
   console.log("Artist:", data.tracks.items[0].artists[0].name);
   console.log("Track name:", data.tracks.items[0].name);
+  console.log("Artist:", data.tracks.items[0].artists[0].name);
+  console.log("Track name:", data.tracks.items[0].name);
+  console.log("Preview: ", data.tracks.items[0].preview_url);
+  console.log("Album: ", data.tracks.items[0].album.name);
 });
 
 var cmd = process.argv[2];
@@ -50,5 +54,5 @@ var cmd = process.argv[2];
 if (cmd === "my-tweets") {
   myTweets();
 } else if (cmd === "spotify-this-song") {
-  Spotify();
+  askSpotify();
 }
