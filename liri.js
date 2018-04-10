@@ -107,8 +107,7 @@ var cmd = process.argv[2];
 
 if (cmd === "do-what-it-says") {
   doWhat();
-}
-if (cmd === "my-tweets") {
+} else if (cmd === "my-tweets") {
   myTweets();
 } else if (cmd === "spotify-this-song") {
   askSpotify();
