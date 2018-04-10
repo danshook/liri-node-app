@@ -87,7 +87,18 @@ function doWhat() {
     if (err) {
       console.log(err);
     } else {
-      return data;
+      console.log(data);
+
+      var dataArr = data.split(",");
+      cmd = dataArr[0];
+      search = dataArr[1];
+
+      if (cmd === "spotify-this-song") {
+        askSpotify(search);
+      }
+      if (cmd === "movie-this") {
+        askOMDB(search);
+      }
     }
   });
 }
@@ -102,7 +113,7 @@ function doWhat() {
 var cmd = process.argv[2];
 
 if (cmd === "do-what-it-says") {
-  cmd = doWhat();
+  doWhat();
 }
 if (cmd === "my-tweets") {
   myTweets();
