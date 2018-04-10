@@ -30,10 +30,10 @@ function myTweets() {
 
 // *******  Spotify *******
 //
-function askSpotify() {
+function askSpotify(song) {
   var client = new Spotify(keys.spotify);
   // }
-  song = process.argv[3];
+  // song = process.argv[3];
   if (song === undefined) {
     song = "The Sign";
   }
@@ -55,8 +55,8 @@ function askSpotify() {
 }
 // *******  OMDB *******
 //
-function askOMDB() {
-  var movie = process.argv[3];
+function askOMDB(movie) {
+  // var movie = process.argv[3];
 
   if (movie == undefined) {
     movie = "Mr. Nobody";
@@ -95,9 +95,12 @@ function doWhat() {
 
       if (cmd === "spotify-this-song") {
         askSpotify(search);
-      }
-      if (cmd === "movie-this") {
+      } else if (cmd === "movie-this") {
         askOMDB(search);
+      } else if (cmd === "my-tweets") {
+        myTweets();
+      } else {
+        console.log("Please enter valid command");
       }
     }
   });
@@ -110,9 +113,9 @@ if (cmd === "do-what-it-says") {
 } else if (cmd === "my-tweets") {
   myTweets();
 } else if (cmd === "spotify-this-song") {
-  askSpotify();
+  askSpotify(process.argv[3]);
 } else if (cmd === "movie-this") {
-  askOMDB();
+  askOMDB(process.argv[3]);
 } else {
   console.log("Please enter valid command");
 }
