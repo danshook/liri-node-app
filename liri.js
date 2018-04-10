@@ -103,13 +103,6 @@ function doWhat() {
   });
 }
 
-// if (cmd === "do-what-it-says") {
-// go to random file, using Fs require
-// get contents
-// put contents into cmd, proceed with rest of code
-// return as result of that function the contents of random text file
-// }
-
 var cmd = process.argv[2];
 
 if (cmd === "do-what-it-says") {
