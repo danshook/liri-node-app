@@ -33,8 +33,8 @@ function askSpotify(song) {
   var client = new Spotify(keys.spotify);
   if (song === undefined) {
     song = "The Sign";
+    var artist = "Ace of Base";
   }
-
   spotify.search({ type: "track", query: song, limit: 10 }, function(
     err,
     data
@@ -42,14 +42,19 @@ function askSpotify(song) {
     if (err) {
       return console.log("Error in Spotify: " + err);
     }
-
-    //   console.log ("Full:", JSON.stringify(data));
-    console.log("Artist:", data.tracks.items[0].artists[0].name);
-    console.log("Track name:", data.tracks.items[0].name);
-    console.log("Preview: ", data.tracks.items[0].preview_url);
-    console.log("Album: ", data.tracks.items[0].album.name);
+    var i = 0;
+    if (artist != undefined) {
+      while (data.tracks.items[i].artists[0].name != artist) {
+        i++;
+      }
+    }
+    console.log("Artist:", data.tracks.items[i].artists[0].name);
+    console.log("Track name:", data.tracks.items[i].name);
+    console.log("Preview: ", data.tracks.items[i].preview_url);
+    console.log("Album: ", data.tracks.items[i].album.name);
   });
 }
+
 // *******  OMDB *******
 //
 function askOMDB(movie) {
