@@ -4,6 +4,7 @@ var Twitter = require("twitter");
 var Spotify = require("node-spotify-api");
 // var Request = require("request");
 var keys = require("./keys");
+var fs = require("fs");
 
 var params = { screen_name: "voodoorundown", count: 20 };
 var spotify = new Spotify(keys.spotify);
@@ -79,12 +80,36 @@ function askOMDB() {
   });
 }
 
+// ******* fs *******
+//
+function doWhat() {
+  fs.readFile("random.txt", "UTF-8", function(err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      return data;
+    }
+  });
+}
+
+// if (cmd === "do-what-it-says") {
+// go to random file, using Fs require
+// get contents
+// put contents into cmd, proceed with rest of code
+// return as result of that function the contents of random text file
+// }
+
 var cmd = process.argv[2];
 
+if (cmd === "do-what-it-says") {
+  cmd = doWhat();
+}
 if (cmd === "my-tweets") {
   myTweets();
 } else if (cmd === "spotify-this-song") {
   askSpotify();
 } else if (cmd === "movie-this") {
   askOMDB();
+} else {
+  console.log("Please enter valid command");
 }
